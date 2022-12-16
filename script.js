@@ -7,10 +7,9 @@ function Book(title, author, pages, read) {
     this.read = read;
 }
 
-const bookCards = document.getElementById('book-cards');
-
 function addBookToLibrary(title, author, pages, read) {
-    const addBook = new Book(title, author, pages, read);
+    const bookCards = document.getElementById('book-cards');
+    const addBook = new Book(title, author, Number(pages), read);
     library.push(addBook);
     const card = document.createElement('div');
     const h1 = document.createElement('h1');
@@ -41,4 +40,29 @@ function addBookToLibrary(title, author, pages, read) {
     console.table(library);
 }
 
-addBookToLibrary('The hunger game', 'someone', 200, 'read');
+addBookToLibrary('Catching Fire', 'Suzanne Collins', 391, 'read');
+
+const addBookBtn = document.querySelector('button.add-book');
+const addBookFormDiv = document.querySelector('#form-div');
+const addBookOpacity = document.querySelector('#opacity');
+
+addBookFormDiv.style.display = 'none';
+
+addBookBtn.addEventListener('click', () => {
+    addBookFormDiv.style.display = 'initial';
+    addBookFormDiv.className = 'enable-form';
+    addBookOpacity.className = 'opacity';
+});
+
+document.querySelector('form').addEventListener('submit', (e) => {
+    e.preventDefault();
+    addBookToLibrary(
+        this.title.value,
+        this.author.value,
+        this.pages.value,
+        this.read.value
+    );
+    addBookFormDiv.style.display = 'none';
+    addBookOpacity.className = '';
+    addBookFormDiv.className = '';
+});
