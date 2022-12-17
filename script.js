@@ -14,11 +14,34 @@ function addBookToLibrary(title, author, pages, read) {
     const card = document.createElement('div');
     const h1 = document.createElement('h1');
     const div = document.createElement('div');
+    const label = document.createElement('label');
+    const input = document.createElement('input');
     const btn = document.createElement('button');
     card.className = 'card';
     card.setAttribute('data-title-card', addBook.title);
     h1.textContent = addBook.title;
     div.textContent = `Author: ${addBook.author}, Pages: ${addBook.pages}`;
+    label.textContent = 'Read: ';
+    input.setAttribute('type', 'checkbox');
+    input.setAttribute('data-title', addBook.title);
+    if (read === 'read') {
+        input.checked = true;
+    } else {
+        input.checked = false;
+    }
+    input.addEventListener('change', (e) => {
+        console.log(e.target);
+        console.log(input.checked);
+        const findIndex = library.findIndex(
+            (item) => item.title === e.target.getAttribute('data-title')
+        );
+        if (input.checked) {
+            library[findIndex].toggleRead('read');
+        } else {
+            library[findIndex].toggleRead('not read');
+        }
+        console.table(library);
+    });
     btn.textContent = 'Remove';
     btn.setAttribute('data-title-button', addBook.title);
     btn.addEventListener('click', (e) => {
@@ -36,7 +59,8 @@ function addBookToLibrary(title, author, pages, read) {
         console.table(library);
     });
     bookCards.appendChild(card);
-    card.append(h1, div, btn);
+    label.appendChild(input);
+    card.append(h1, div, label, btn);
     console.table(library);
 }
 
@@ -56,13 +80,25 @@ addBookBtn.addEventListener('click', () => {
 
 document.querySelector('form').addEventListener('submit', (e) => {
     e.preventDefault();
-    addBookToLibrary(
-        this.title.value,
-        this.author.value,
-        this.pages.value,
-        this.read.value
+
+    const titleValue = document.querySelector('input[name="title"]').value;
+    const authorValue = document.querySelector('input[name="author"]').value;
+    const pagesValue = document.querySelector('input[name="pages"]').value;
+    const readValue = document.querySelector('input[name="read"]').value;
+
+    const findDuplicate = library.find(
+        (item) => item.title.toLowerCase() === titleValue.toLowerCase()
     );
-    addBookFormDiv.style.display = 'none';
-    addBookOpacity.className = '';
-    addBookFormDiv.className = '';
+    if (findDuplicate) {
+        alert('Book has been added');
+    } else {
+        addBookToLibrary(titleValue, authorValue, pagesValue, readValue);
+        addBookFormDiv.style.display = 'none';
+        addBookOpacity.className = '';
+        addBookFormDiv.className = '';
+    }
 });
+
+Book.prototype.toggleRead = function (haveread) {
+    this.read = haveread;
+};
