@@ -1,10 +1,11 @@
-:root{
+:root {
     font-size: 17px;
 }
 
-body{
+body {
     display: grid;
     grid-template-rows: 15% calc(100% - 15%);
+    justify-items: stretch;
     height: 100vh;
     position: relative;
 }
@@ -13,32 +14,69 @@ body{
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    color: #363636;
 }
+
+input[type='checkbox'] {
+    accent-color: green;
+}
+
+/* Header section  */
 
 header {
     display: flex;
-    flex-direction: column;
-    justify-content: center;
+    width: 100%;
+    justify-content: space-between;
+    padding: 0 5% 0 5%;
     align-items: center;
-    background-color: blue;
+    background-color: #1d556f;
+    box-shadow: 0 0 4px 0 rgba(0, 0, 0, 0.08), 0 2px 4px 0 rgba(0, 0, 0, 0.12);
+}
+
+header h1 {
+    color: black;
+    font-size: 3.3rem;
 }
 
 div#add-Book {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background-color: blue;
+    padding-top: 10px;
 }
 
+button.add-book,
+input[value='Add Book'] {
+    background-color: #a7d7c5;
+    border: none;
+    font-size: 1.2rem;
+    padding: 10px;
+    width: 150px;
+    -webkit-transition-duration: 0.5s;
+    transition-duration: 0.5s;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+button.add-book:hover {
+    border: solid 5px #74b49b;
+}
+
+button.add-book:active {
+    padding: 0;
+    margin: 0;
+    opacity: 1;
+    transition: 0s;
+}
+
+/* Book cards section */
+
 #book-cards {
-    background-color: aquamarine;
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
     grid-auto-rows: 50%;
-    column-gap: 1.5%;
-    row-gap: 3%;
-    padding: 20px;
+    justify-self: stretch;
+    gap: 20px;
+    padding: 45px;
     overflow: auto;
+    background-color: #85a6b1;
 }
 
 div.card {
@@ -47,24 +85,131 @@ div.card {
     gap: 10%;
     justify-content: center;
     align-items: center;
-    background-color: antiquewhite;
+    background-color: #f7f7f7;
     padding: 5%;
+    border-radius: 5px;
+    box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
 }
 
-div.enable-form {
-    display: none;
-    background-color: tomato;
-    position: absolute;
-    left: 50%;
-    margin-left: -100px;
-    top: 50%;
-    margin-top: -50px;
+div.card label,
+div.card div {
+    font-size: 1.04rem;
 }
+
+div.card label {
+    display: flex;
+    gap: 8px;
+}
+
+div.card button {
+    padding: 5px;
+    font-size: 0.8rem;
+}
+
+div.card button:hover {
+    background-color: #e36161;
+    border: none;
+}
+
+/* Form section(enable by JS) */
 
 div.opacity {
-    opacity: 0.5;
+    display: flex;
+    opacity: 0.7;
     width: 100%;
     height: 100%;
     background-color: black;
     position: absolute;
+    transition: all 1s ease;
+}
+
+div#form-div {
+    display: none;
+    height: auto;
+    width: 28%;
+    background-color: #1d556f;
+    position: absolute;
+    padding: 30px;
+    justify-self: center;
+    align-self: center;
+    border-radius: 8px;
+    transition: all 2s ease;
+    box-shadow: rgba(9, 30, 66, 0.25) 0px 4px 8px -2px,
+        rgba(9, 30, 66, 0.08) 0px 0px 0px 1px;
+}
+
+div#form-div > div {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    margin-bottom: 5px;
+}
+form div {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    margin-bottom: 10px;
+}
+
+form div:nth-child(4) {
+    flex-direction: row;
+    gap: 10px;
+}
+
+form label {
+    color: black;
+    font-size: 1.2rem;
+}
+
+input[type='text'] {
+    background-color: #f7f7f7;
+    border: none;
+    padding: 5px;
+    font-size: 1rem;
+}
+
+button.exit {
+    width: 25px;
+    height: 25px;
+    border-radius: 50%;
+    border: none;
+    color: black;
+    font-weight: bold;
+}
+
+button.exit:hover {
+    background-color: #cb3737;
+    transition: all 0.5s ease-out;
+}
+
+input[value='Add Book'] {
+    font-size: 1rem;
+    width: 100px;
+    padding: 8px;
+}
+
+input[value='Add Book']:hover {
+    background-color: #74b49b;
+}
+
+@media only screen and (max-width: 450px) {
+    body {
+        height: 100%;
+        grid-template-rows: 20% calc(100% - 20%);
+    }
+
+    header {
+        flex-direction: column;
+        justify-content: space-around;
+        padding: 0 0 25px 0;
+    }
+
+    button.add-book {
+        padding: 8px;
+        font-size: 1.1rem;
+    }
+
+    div#add-Book {
+        padding-top: 0;
+    }
 }
