@@ -7,24 +7,28 @@ function Book(title, author, pages, read) {
     this.read = read;
 }
 
+Book.prototype.toggleRead = function (status) {
+    this.read = status;
+};
+
 function addBookToLibrary(title, author, pages, read) {
     const bookCards = document.getElementById('book-cards');
     const addBook = new Book(title, author, Number(pages), read);
     library.push(addBook);
     const card = document.createElement('div');
-    const h1 = document.createElement('h1');
+    const h2 = document.createElement('h2');
     const div = document.createElement('div');
     const label = document.createElement('label');
     const input = document.createElement('input');
     const btn = document.createElement('button');
     card.className = 'card';
     card.setAttribute('data-title-card', addBook.title);
-    h1.textContent = addBook.title;
-    div.textContent = `Author: ${addBook.author}, Pages: ${addBook.pages}`;
-    label.textContent = 'Read: ';
+    h2.textContent = addBook.title;
+    div.textContent = `by ${addBook.author}, ${addBook.pages} pages`;
+    label.textContent = 'Read Status ';
     input.setAttribute('type', 'checkbox');
     input.setAttribute('data-title', addBook.title);
-    if (read === 'read') {
+    if (read) {
         input.checked = true;
     } else {
         input.checked = false;
@@ -36,9 +40,9 @@ function addBookToLibrary(title, author, pages, read) {
             (item) => item.title === e.target.getAttribute('data-title')
         );
         if (input.checked) {
-            library[findIndex].toggleRead('read');
+            library[findIndex].toggleRead(true);
         } else {
-            library[findIndex].toggleRead('not read');
+            library[findIndex].toggleRead(false);
         }
         console.table(library);
     });
@@ -60,31 +64,42 @@ function addBookToLibrary(title, author, pages, read) {
     });
     bookCards.appendChild(card);
     label.appendChild(input);
-    card.append(h1, div, label, btn);
+    card.append(h2, div, label, btn);
     console.table(library);
 }
 
-addBookToLibrary('Catching Fire', 'Suzanne Collins', 391, 'read');
+addBookToLibrary('Catching Fire', 'Suzanne Collins', 391, true);
 
+const formDoc = document.querySelector('form');
 const addBookBtn = document.querySelector('button.add-book');
 const addBookFormDiv = document.querySelector('#form-div');
 const addBookOpacity = document.querySelector('#opacity');
+const exitAddBook = document.querySelector('button.exit');
 
-addBookFormDiv.style.display = 'none';
+function displayManipulation(option) {
+    switch (option) {
+        case 'enable':
+            addBookFormDiv.style.display = 'initial';
+            addBookOpacity.className = 'opacity';
+            break;
+        case 'disable':
+            addBookFormDiv.style.display = 'none';
+            addBookOpacity.className = '';
+            break;
+    }
+}
 
-addBookBtn.addEventListener('click', () => {
-    addBookFormDiv.style.display = 'initial';
-    addBookFormDiv.className = 'enable-form';
-    addBookOpacity.className = 'opacity';
-});
-
-document.querySelector('form').addEventListener('submit', (e) => {
+addBookBtn.addEventListener('click', () => displayManipulation('enable'));
+exitAddBook.addEventListener('click', () => displayManipulation('disable'));
+formDoc.addEventListener('submit', (e) => {
     e.preventDefault();
 
     const titleValue = document.querySelector('input[name="title"]').value;
     const authorValue = document.querySelector('input[name="author"]').value;
     const pagesValue = document.querySelector('input[name="pages"]').value;
-    const readValue = document.querySelector('input[name="read"]').value;
+    const readValue = document.querySelector('input[name="read"]').checked;
+
+    console.log(readValue);
 
     const findDuplicate = library.find(
         (item) => item.title.toLowerCase() === titleValue.toLowerCase()
@@ -93,12 +108,6 @@ document.querySelector('form').addEventListener('submit', (e) => {
         alert('Book has been added');
     } else {
         addBookToLibrary(titleValue, authorValue, pagesValue, readValue);
-        addBookFormDiv.style.display = 'none';
-        addBookOpacity.className = '';
-        addBookFormDiv.className = '';
+        displayManipulation('disable');
     }
 });
-
-Book.prototype.toggleRead = function (haveread) {
-    this.read = haveread;
-};
