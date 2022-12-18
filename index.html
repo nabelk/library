@@ -1,48 +1,49 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Library</title>
-    <link rel="stylesheet" href="style.css">
-  </head>
-  
-  <body>
-    <header>
-      <h2>Library</h2>
-      <div id="add-Book"><button class="add-book">Add Book</button></div>
-    </header>
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Library</title>
+        <link rel="stylesheet" href="style.css" />
+    </head>
 
-    <main id="book-cards"></main>
+    <body>
+        <header>
+            <h1>Library</h1>
+            <div id="add-Book"><button class="add-book">New Book</button></div>
+        </header>
 
-    <div id="opacity"></div>
+        <main id="book-cards"></main>
 
-    <div id="form-div">
-      <form>
-        <div>
-          <label for="title">Title: </label>
-          <input id="title" name="title" type="text" >
-        </div>
-        <div>
-          <label for="author">Author: </label>
-          <input id="author" name="author" type="text" >
-        </div>
-        <div>
-          <label for="pages">Pages: </label>
-          <input id="pages" name="pages" type="text">
-        </div>
-        <div>
-          <label for="read">Read: </label>
-          <input id="read" name="read" type="text" >
-        </div>
-        <div>
-          <input id="submit" type="submit">
-        </div>
-      </form>
-    </div>
+        <div id="opacity"></div>
 
-  </body>
+        <div id="form-div">
+            <div><button class="exit">X</button></div>
 
-  <script src="script.js" defer></script>
+            <form>
+                <div>
+                    <label for="title">Title</label>
+                    <input id="title" name="title" type="text" required />
+                </div>
+                <div>
+                    <label for="author">Author</label>
+                    <input id="author" name="author" type="text" required />
+                </div>
+                <div>
+                    <label for="pages">Pages</label>
+                    <input id="pages" name="pages" type="text" required />
+                </div>
+                <div>
+                    <label for="read">Have you read? </label>
+                    <input id="read" name="read" type="checkbox" />
+                </div>
+                <div>
+                    <input id="submit" type="submit" value="Add Book" />
+                </div>
+            </form>
+        </div>
+    </body>
+
+    <script src="script.js" defer></script>
 </html>
