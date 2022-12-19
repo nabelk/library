@@ -21,16 +21,18 @@
 
 ## Technologies Used
 
--   HTML
--   CSS
--   Javascript
-        a) Changes on the display also get updated on the object.
-        b) Heavy DOM usage to manipulate the display using vanilla js.
+### HTML
+
+### CSS
+
+### Javascript
+    a) Changes on the display also get updated on the object.
+    b) Heavy DOM usage to manipulate the display using vanilla js.
 
 ## Tools
 
--   Prettier && eslint
-        For finding erros and formatting on save (vscode).
+### Prettier && eslint
+    For finding erros and formatting on save (vscode).
 
 ## Features
 
