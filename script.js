@@ -34,8 +34,6 @@ function addBookToLibrary(title, author, pages, read) {
         input.checked = false;
     }
     input.addEventListener('change', (e) => {
-        console.log(e.target);
-        console.log(input.checked);
         const findIndex = library.findIndex(
             (item) => item.title === e.target.getAttribute('data-title')
         );
@@ -44,31 +42,45 @@ function addBookToLibrary(title, author, pages, read) {
         } else {
             library[findIndex].toggleRead(false);
         }
-        console.table(library);
     });
     btn.textContent = 'Remove';
     btn.setAttribute('data-title-button', addBook.title);
     btn.addEventListener('click', (e) => {
-        const findtitle = library.findIndex(
-            (item) => item.title === e.target.getAttribute('data-title-button')
-        );
-        library.splice(findtitle, 1);
-        document
-            .querySelector(
-                `[data-title-card="${e.target.getAttribute(
-                    'data-title-button'
-                )}"]`
-            )
-            .remove();
-        console.table(library);
+        const dataTitle = e.target.getAttribute('data-title-button');
+        const findtitle = library.findIndex((item) => item.title === dataTitle);
+        const confirmation = document.getElementById('remove-confirmation');
+        const div1 = document.createElement('div');
+        const btn1 = document.createElement('button');
+        const btn2 = document.createElement('button');
+        btn1.textContent = 'Yes';
+        btn2.textContent = 'No';
+        div1.append(btn1, btn2);
+        confirmation.appendChild(div1);
+        confirmation.style.display = 'flex';
+
+        function removeManipulation() {
+            confirmation.style.display = 'none';
+            div1.remove();
+        }
+
+        btn1.addEventListener('click', () => {
+            library.splice(findtitle, 1);
+            document.querySelector(`[data-title-card="${dataTitle}"]`).remove();
+            removeManipulation();
+        });
+
+        btn2.addEventListener('click', () => {
+            removeManipulation();
+        });
     });
     bookCards.appendChild(card);
     label.appendChild(input);
     card.append(h2, div, label, btn);
-    console.table(library);
 }
 
 addBookToLibrary('Catching Fire', 'Suzanne Collins', 391, true);
+
+// Add book dom
 
 const formDoc = document.querySelector('form');
 const addBookBtn = document.querySelector('button.add-book');
@@ -98,8 +110,6 @@ formDoc.addEventListener('submit', (e) => {
     const authorValue = document.querySelector('input[name="author"]').value;
     const pagesValue = document.querySelector('input[name="pages"]').value;
     const readValue = document.querySelector('input[name="read"]').checked;
-
-    console.log(readValue);
 
     const findDuplicate = library.find(
         (item) => item.title.toLowerCase() === titleValue.toLowerCase()
