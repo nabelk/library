@@ -15,7 +15,7 @@
 
 ## General Information
 
--   The project is a part The Odin Project: Full Stack JavaScript.
+-   The project is a part of The Odin Project: Full Stack JavaScript.
 -   It can add book list and can update the read status.
 -   The main purpose of the project is to get understanding on object constructor and prototype.
 
@@ -24,13 +24,13 @@
 -   HTML
 -   CSS
 -   Javascript
-    a) Changes on the display also get updated on the object.
-    b) Heavy DOM usage to manipulate the display using vanilla js.
+        a) Changes on the display also get updated on the object.
+        b) Heavy DOM usage to manipulate the display using vanilla js.
 
 ## Tools
 
 -   Prettier && eslint
-    For finding erros and formatting on save (vscode).
+        For finding erros and formatting on save (vscode).
 
 ## Features
 
