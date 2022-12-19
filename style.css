@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
+
 :root {
     font-size: 17px;
 }
@@ -5,7 +7,6 @@
 body {
     display: grid;
     grid-template-rows: 15% calc(100% - 15%);
-    justify-items: stretch;
     height: 100vh;
     position: relative;
 }
@@ -15,6 +16,7 @@ body {
     padding: 0;
     box-sizing: border-box;
     color: #363636;
+    font-family: 'Roboto', sans-serif;
 }
 
 input[type='checkbox'] {
@@ -70,7 +72,7 @@ button.add-book:active {
 
 #book-cards {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
     grid-auto-rows: 50%;
     justify-self: stretch;
     gap: 20px;
@@ -111,6 +113,38 @@ div.card button:hover {
     border: none;
 }
 
+div#remove-confirmation {
+    display: none;
+    flex-direction: column;
+    gap: 20px;
+    background-color: #1d556f;
+    position: absolute;
+    padding: 30px;
+    justify-self: center;
+    align-self: center;
+    border-radius: 8px;
+    transition: all 2s ease;
+    box-shadow: rgba(9, 30, 66, 0.25) 0px 4px 8px -2px,
+        rgba(9, 30, 66, 0.08) 0px 0px 0px 1px;
+}
+
+div#remove-confirmation div:first-child {
+    color: black;
+    font-size: 1.4rem;
+}
+
+div#remove-confirmation div:last-child {
+    display: flex;
+    gap: 20px;
+}
+
+div#remove-confirmation button {
+    color: black;
+    font-size: 1rem;
+    width: 80px;
+    padding: 6px;
+}
+
 /* Form section(enable by JS) */
 
 div.opacity {
@@ -126,7 +160,7 @@ div.opacity {
 div#form-div {
     display: none;
     height: auto;
-    width: 28%;
+    width: 455px;
     background-color: #1d556f;
     position: absolute;
     padding: 30px;
@@ -165,7 +199,8 @@ input[type='text'] {
     background-color: #f7f7f7;
     border: none;
     padding: 5px;
-    font-size: 1rem;
+    font-size: 1.1rem;
+    color: black;
 }
 
 button.exit {
@@ -192,16 +227,28 @@ input[value='Add Book']:hover {
     background-color: #74b49b;
 }
 
-@media only screen and (max-width: 450px) {
+/* Media query */
+
+@media only screen and (max-height: 555px) {
     body {
-        height: 100%;
-        grid-template-rows: 20% calc(100% - 20%);
+        height: 800px;
+    }
+
+    div.opacity {
+        height: 800px;
+    }
+}
+
+@media only screen and (max-width: 530px) {
+    body {
+        grid-template-rows: 25% calc(100% - 25%);
     }
 
     header {
         flex-direction: column;
         justify-content: space-around;
-        padding: 0 0 25px 0;
+        gap: 10px;
+        padding: 25px 0 35px 0;
     }
 
     button.add-book {
@@ -211,5 +258,13 @@ input[value='Add Book']:hover {
 
     div#add-Book {
         padding-top: 0;
+    }
+
+    div#form-div {
+        width: 80%;
+    }
+
+    #book-cards {
+        grid-template-columns: 1fr;
     }
 }
