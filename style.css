@@ -231,11 +231,11 @@ input[value='Add Book']:hover {
 
 @media only screen and (max-height: 555px) {
     body {
-        height: 800px;
+        height: 555px;
     }
 
     div.opacity {
-        height: 800px;
+        height: 555px;
     }
 }
 
