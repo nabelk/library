@@ -119,5 +119,6 @@ formDoc.addEventListener('submit', (e) => {
     } else {
         addBookToLibrary(titleValue, authorValue, pagesValue, readValue);
         displayManipulation('disable');
+        formDoc.reset();
     }
 });
