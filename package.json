@@ -1,0 +1,26 @@
+{
+  "name": "library",
+  "version": "1.0.0",
+  "description": "> Create a simple library web application. > Live demo [_here_](https://nabelk.github.io/library/).",
+  "main": "script.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/nabelk/library.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/nabelk/library/issues"
+  },
+  "homepage": "https://github.com/nabelk/library#readme",
+  "devDependencies": {
+    "eslint": "^8.31.0",
+    "eslint-config-airbnb-base": "^15.0.0",
+    "eslint-config-prettier": "^8.6.0",
+    "eslint-plugin-import": "^2.26.0"
+  }
+}
