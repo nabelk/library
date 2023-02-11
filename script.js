@@ -117,6 +117,7 @@ formDoc.addEventListener('submit', (e) => {
         (item) => item.title.toLowerCase() === titleValue.toLowerCase()
     );
     if (findDuplicate) {
+        // eslint-disable-next-line no-alert
         alert('Book has been added');
     } else {
         addBookToLibrary(titleValue, authorValue, pagesValue, readValue);
@@ -124,3 +125,15 @@ formDoc.addEventListener('submit', (e) => {
         formDoc.reset();
     }
 });
+
+const pagesInput = document.querySelector('input[name="pages"]');
+function checkisNum() {
+    const num = Number(pagesInput.value);
+    // eslint-disable-next-line no-restricted-globals
+    if (isNaN(num)) {
+        pagesInput.setCustomValidity('Please enter number.');
+    } else if (num) {
+        pagesInput.setCustomValidity('');
+    }
+}
+pagesInput.addEventListener('input', checkisNum);
